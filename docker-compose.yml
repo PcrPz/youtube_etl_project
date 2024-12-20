@@ -1,0 +1,37 @@
+services:
+  sd-db:
+    image: postgres:13
+    container_name: sd-db
+    environment:
+      - POSTGRES_DB=youtube_data_db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - youtube
+
+  sd-pgadmin:
+    image: dpage/pgadmin4
+    container_name: sd-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - sd-db
+    restart: always
+    networks:
+      - youtube
+
+volumes:
+  postgres_data:
+
+networks:
+  youtube:
+
+  
