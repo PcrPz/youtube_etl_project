@@ -1,16 +1,39 @@
-### End To End Automated Data Pipeline(Youtube Data Analysis)
-## Technology Stack
-Python,Postgres,Docker,Prefect
-## Workflow
-the workflow is divided into 3 parts of ETL(Extract,Load,Transfrom)
-1. Extract: Extract Data from kaggle website [link here](https://www.kaggle.com/datasets/datasnaek/youtube-new) and stored in a folder 
-2. Transfrom: in this part we have folder in part one we divided into 3 file Asia,Europe,North America(dimesion_table) the data undergoes a cleaning process, addressing issues like handling null values, remove empty data. Once the dimension tables are created, a fact table is constructed as a bridge table, linking all the dimension tables using surrogate keys. In addition to these keys, new columns are introduced to provide insights into the most interacted videos in each region. These columns include:
- - eu_interaction_rate
- - na_interaction_rate
- - as_interaction_rate
-These columns represent the video interaction rates for each region, calculated based on views, likes, and dislikes,comment count.
-3. Load:we have clean dataset are the loaded into postgres(docker) connect from python 
-The entire process is automated pipeline using Prefect
+# 📊 End-to-End Automated Data Pipeline (YouTube Data Analysis)
 
+This project demonstrates a fully automated data pipeline for analyzing YouTube data using an ETL (Extract, Transform, Load) workflow. The pipeline leverages **Python**, **PostgreSQL**, **Docker**, and **Prefect** for data extraction, cleaning, transformation, and loading into a database for further analysis.
+
+## 🛠️ Technology Stack
+- **Programming Language**: Python
+- **Database**: PostgreSQL (via Docker)
+- **Workflow Orchestration**: Prefect
+- **Data Source**: Kaggle Dataset
+
+## 🔄 Workflow Overview
+The workflow is divided into three main phases of the ETL process:
+
+### 1. Extract
+- **Data Source**: Data is extracted from a Kaggle dataset (link to dataset can be added here).
+- **Storage**: Extracted data is stored locally in a folder for further processing.
+
+### 2. Transform
+- **Data Cleaning**: The extracted data undergoes cleaning to:
+  - Handle null values
+  - Remove empty or irrelevant data
+- **Dimension Table Creation**: The cleaned data is divided into three dimension tables based on regions:
+  - Asia
+  - Europe
+  - North America
+- **Fact Table Construction**:
+  - A fact table is created as a bridge table linking all the dimension tables using surrogate keys.
+  - New columns are introduced to provide insights into the most interacted videos in each region:
+    - `eu_interaction_rate`: Interaction rate for Europe
+    - `na_interaction_rate`: Interaction rate for North America
+    - `as_interaction_rate`: Interaction rate for Asia
+  - These interaction rates are calculated based on views, likes, dislikes, and comment counts.
+
+### 3. Load
+- **Database Integration**: The cleaned and transformed dataset is loaded into a PostgreSQL database hosted in a Docker container.
+- **Automation**: The entire ETL process is automated using **Prefect**, ensuring scalability and fault tolerance.
+  
 ## Snapshot of Result Data
 ![Result_Data](Result_Data.png)
